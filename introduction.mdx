@@ -1,0 +1,109 @@
+---
+title: Introduction to Qiwi Cash
+description: Discover Qiwi Cash, a comprehensive documentation platform designed to help teams organize, manage, and collaborate on project documentation effortlessly.
+---
+
+## Overview
+
+Qiwi Cash empowers you to create, organize, and maintain project documentation with ease. You streamline workflows by centralizing all your docs in one intuitive platform, enabling seamless collaboration across teams. Benefit from version control, searchability, and customizable templates that save time and reduce errors.
+
+<Callout kind="info">
+  Qiwi Cash integrates with your existing tools like GitHub and Slack for effortless documentation management.
+</Callout>
+
+## Key Features
+
+Explore the core capabilities that make Qiwi Cash your go-to documentation solution.
+
+<Columns cols={3}>
+  <Card title="Real-Time Collaboration" icon="users" href="/collaboration">
+    Edit documents simultaneously with teammates, with live previews and change tracking.
+  </Card>
+  <Card title="Version History" icon="git-branch" href="/version-control">
+    Track every change, revert to previous versions, and compare diffs effortlessly.
+  </Card>
+  <Card title="Custom Templates" icon="file-text" href="/templates">
+    Start with pre-built templates for APIs, guides, and changelogs to accelerate creation.
+  </Card>
+</Columns>
+
+## Who Should Use Qiwi Cash
+
+Qiwi Cash suits various roles in your organization.
+
+<Tabs>
+  <Tab title="Developers" icon="code">
+    Document APIs, SDKs, and codebases with syntax highlighting and interactive examples.
+  </Tab>
+  <Tab title="Product Managers" icon="package" >
+    Maintain roadmaps, release notes, and user guides in a single, shareable space.
+  </Tab>
+  <Tab title="Engineering Leads" icon="settings">
+    Centralize onboarding docs, architecture diagrams, and troubleshooting knowledge.
+  </Tab>
+</Tabs>
+
+## Quick Start
+
+Get up and running in minutes.
+
+<Steps>
+  <Step title="Create Account" icon="user-plus">
+    Sign up at `https://app.qiwicash.com/register` with your email.
+  </Step>
+  <Step title="New Workspace" icon="plus">
+    Click "New Workspace" and name it for your project, like "MyApp Docs".
+  </Step>
+  <Step title="First Document" icon="file-plus">
+    Select a template and start editing. Use markdown for rich formatting.
+  </Step>
+</Steps>
+
+<CodeGroup tabs="JavaScript,Python">
+```javascript
+// Embed Qiwi Cash docs in your app
+import { QiwiCashEmbed } from '@qiwicash/embed';
+
+<QiwiCashEmbed docId="your-doc-id" apiKey="YOUR_API_KEY" />
+```
+```python
+# Python integration example
+from qiwicash import Client
+
+client = Client(api_key="YOUR_API_KEY")
+doc = client.docs.get("your-doc-id")
+print(doc.content)
+```
+</CodeGroup>
+
+## Next Steps
+
+Dive deeper into Qiwi Cash.
+
+<Columns cols={2}>
+  <Card title="Quickstart Guide" icon="rocket" href="/quickstart">
+    Set up your first full documentation site.
+  </Card>
+  <Card title="Authentication" icon="lock" href="/authentication">
+    Secure your docs with API keys and OAuth.
+  </Card>
+</Columns>
+
+## Brand Guidelines
+
+<Expandable title="Primary Brand Color" default-open="true">
+  Use our primary brand color `#3B82F6` for headers, buttons, and accents to maintain consistency.
+
+  ```css
+  :root {
+    --primary-color: #3B82F6;
+  }
+
+  .header {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  ```
+
+  Avoid using it for text-only elements to ensure readability.
+</Expandable>

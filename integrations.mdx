@@ -1,0 +1,151 @@
+---
+title: Integrations and Extensions
+description: Connect Qiwi Cash with your favorite tools to streamline your documentation workflow.
+---
+
+## Overview
+
+Qiwi Cash supports seamless integrations with popular third-party tools, webhooks for real-time automation, and a robust API for custom solutions. You can connect services like GitHub for version control sync and Slack for notifications, import content from external sources, and build tailored extensions. These features help you automate workflows and keep your documentation up-to-date effortlessly.
+
+<Callout kind="info">
+  Review the [security considerations](#security-considerations) before enabling any integrations.
+</Callout>
+
+## Third-Party Integrations
+
+Connect Qiwi Cash directly to your essential tools using OAuth or API keys. Start with these popular options:
+
+<Columns cols={2}>
+  <Card title="GitHub" icon="github" href="https://github.com/settings/connections">
+    Sync repositories to automatically import Markdown files and track changes in Qiwi Cash. Receive pull request notifications for documentation updates.
+  </Card>
+  <Card title="Slack" icon="message-circle" href="https://api.slack.com/apps">
+    Send deployment alerts, page update notifications, and approval requests to your team channels.
+  </Card>
+</Columns>
+
+<Expandable title="Add More Integrations" default-open="false">
+  Qiwi Cash's integration marketplace offers 20+ apps. Visit your dashboard at `https://dashboard.example.com/integrations` to browse and connect Zapier, Notion, and more.
+</Expandable>
+
+## Webhook Setup
+
+Set up webhooks to trigger actions on events like page updates or user logins. Qiwi Cash sends HTTP POST requests to your endpoint with event data.
+
+<Steps>
+  <Step title="Create Webhook" icon="plus">
+    Navigate to `https://dashboard.example.com/settings/webhooks` and click "New Webhook".
+  </Step>
+  <Step title="Configure Endpoint">
+    Enter your URL, e.g., `https://your-webhook-url.com/qiwi-cash`, and select events.
+  </Step>
+  <Step title="Verify and Test">
+    Qiwi Cash sends a test payload. Respond with HTTP 200 to confirm.
+  </Step>
+</Steps>
+
+Example webhook payload:
+
+<CodeGroup tabs="JSON,JavaScript">
+  ```json
+  {
+    "event": "page.updated",
+    "data": {
+      "pageId": "doc-123",
+      "title": "API Reference",
+      "userId": "user-456"
+    },
+    "timestamp": "2024-10-15T10:30:00Z"
+  }
+  ```
+  ```javascript
+  app.post('/qiwi-cash', (req, res) => {
+    const event = req.body.event;
+    if (event === 'page.updated') {
+      // Handle update
+      console.log('Page updated:', req.body.data);
+    }
+    res.status(200).send('OK');
+  });
+  ```
+</CodeGroup>
+
+## API Access for Custom Integrations
+
+Build custom integrations using Qiwi Cash's REST API at `https://api.example.com/v1`. Authenticate with a bearer token.
+
+<ParamField header="Authorization" param-type="string" required="true">
+  Bearer `{YOUR_API_KEY}`
+</ParamField>
+
+<ParamField query="pageId" param-type="string" required="false">
+  Target page identifier for operations.
+</ParamField>
+
+<Tabs>
+  <Tab title="Create Page" icon="plus">
+    ```bash
+    curl -X POST https://api.example.com/v1/pages \
+      -H "Authorization: Bearer YOUR_API_KEY" \
+      -H "Content-Type: application/json" \
+      -d '{
+        "title": "New Doc",
+        "content": "Initial content here."
+      }'
+    ```
+  </Tab>
+  <Tab title="List Integrations" icon="list">
+    ```bash
+    curl https://api.example.com/v1/integrations \
+      -H "Authorization: Bearer YOUR_API_KEY"
+    ```
+  </Tab>
+</Tabs>
+
+<Response tabs="200,401">
+  ```json
+  {
+    "success": true,
+    "data": {
+      "pageId": "doc-789",
+      "url": "https://docs.example.com/doc-789"
+    }
+  }
+  ```
+  ```json
+  {
+    "error": "Unauthorized",
+    "message": "Invalid token"
+  }
+  ```
+</Response>
+
+## Importing from External Sources
+
+Import Markdown, PDFs, or HTML from GitHub repos, Google Docs, or URLs.
+
+<Steps>
+  <Step title="Prepare Source">
+    Ensure your external content is in a public repo or accessible URL.
+  </Step>
+  <Step title="Import via Dashboard">
+    Go to `https://dashboard.example.com/import`, paste the URL, and select format.
+  </Step>
+  <Step title="Review and Publish">
+    Edit imported content and publish to live docs.
+  </Step>
+</Steps>
+
+## Security Considerations
+
+Protect your integrations with best practices.
+
+<Callout kind="alert">
+  Never expose `{YOUR_API_KEY}` in client-side code or public repos. Use environment variables and rotate keys regularly.
+</Callout>
+
+- Validate webhook payloads with HMAC signatures.
+- Restrict API scopes to minimum required permissions.
+- Monitor integration logs at `https://dashboard.example.com/logs`.
+
+For advanced setups, enable IP whitelisting in account settings.

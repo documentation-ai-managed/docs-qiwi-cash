@@ -1,0 +1,25 @@
+---
+title: Payment Failed to Process
+description: How to fix a payment failure in Qiwi Cash.
+---
+
+## Issue
+- Payment shows as failed or rejected
+- Transaction not completed
+
+## Causes
+- Insufficient balance
+- Incorrect recipient details
+
+## Quick Fix
+
+<Steps>
+  <Step title="Check balance">
+    ````bash
+    curl -H "Authorization: Bearer YOUR_API_KEY" https://api.qiwi.cash/v1/balance
+    ````
+  </Step>
+  <Step title="Verify recipient">
+    Make sure the recipient wallet ID is valid and active.
+  </Step>
+</Steps>

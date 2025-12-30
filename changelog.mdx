@@ -1,0 +1,131 @@
+---
+title: Changelog
+description: Track the latest updates, improvements, and fixes in Qiwi Cash to stay informed about new features.
+---
+
+## Recent Updates
+
+Stay current with Qiwi Cash releases. You receive notifications for major versions through your dashboard at `https://dashboard.example.com/notifications`. Each release includes detailed notes on changes, migration steps, and deprecated items.
+
+<Update label="2024-10-15" description="v2.1.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Added support for instant cross-border transfers to 15+ currencies, reducing settlement time to `<5` minutes.
+- Introduced webhook notifications for real-time transaction updates. Configure them via the dashboard.
+
+## Improvements
+
+- Enhanced wallet balance sync performance by 40%, now updating in real-time during high-volume usage.
+- Improved API rate limiting feedback with clearer error messages like `Rate limit exceeded: {retry_after: 60}`.
+
+## Bug Fixes
+
+- Fixed intermittent failures in batch payout processing.
+- Resolved issue where duplicate transactions appeared in reports due to race conditions.
+
+</Update>
+
+<Update label="2024-09-20" description="v2.0.0" tags={["feature", "breaking"]}>
+
+## New Features
+
+- Launched Qiwi Cash Dashboard with analytics, transaction history, and export tools.
+- Added OAuth 2.0 authentication flow for secure partner integrations.
+
+## Breaking Changes
+
+- Updated API base URL from `/v1` to `/v2`. Update your endpoints accordingly.
+- Deprecated `amount_cents` parameter; use `amount` with `currency` instead.
+
+<CodeGroup tabs="JavaScript,Python">
+```javascript
+// Old v1
+fetch('https://api.example.com/v1/transactions', {
+  body: JSON.stringify({amount_cents: 1000})
+});
+
+// New v2
+fetch('https://api.example.com/v2/transactions', {
+  body: JSON.stringify({amount: 10, currency: 'USD'})
+});
+```
+```python
+# Old v1
+requests.post('https://api.example.com/v1/transactions',
+              json={'amount_cents': 1000})
+
+# New v2
+requests.post('https://api.example.com/v2/transactions',
+              json={'amount': 10, 'currency': 'USD'})
+```
+</CodeGroup>
+
+## Bug Fixes
+
+- Corrected token refresh logic in SDKs.
+
+</Update>
+
+<Update label="2024-08-05" description="v1.5.0" tags={["bugfix", "security"]}>
+
+## Security Updates
+
+- Patched potential XSS vulnerabilities in webhook payloads.
+- Enforced stricter validation on `user_id` fields to prevent injection attacks.
+
+## Bug Fixes
+
+- Fixed payout status polling timeouts.
+- Resolved dashboard loading issues for large transaction histories (`>10,000` records).
+
+## Improvements
+
+- Optimized database queries for reports, reducing load times by 25%.
+
+</Update>
+
+## Upcoming Roadmap
+
+Qiwi Cash continues to evolve based on your feedback. Here's what's coming next.
+
+<Columns cols={2}>
+  <Card title="Q4 2024" icon="zap" href="https://dashboard.example.com/roadmap">
+    Mobile SDK launch and fiat-to-crypto on-ramps.
+  </Card>
+  <Card title="Q1 2025" icon="trending-up" href="https://dashboard.example.com/roadmap">
+    Advanced fraud detection with ML and multi-signature wallets.
+  </Card>
+</Columns>
+
+<Callout kind="tip">
+  Subscribe to updates at `https://dashboard.example.com/notifications` to get email alerts for new releases.
+</Callout>
+
+## How to Upgrade
+
+Follow these steps to upgrade Qiwi Cash safely.
+
+<Steps>
+  <Step title="Review Changes" icon="book-open">
+    Check the release notes above for breaking changes.
+  </Step>
+  <Step title="Backup Data" icon="database">
+    Export your transaction history from the dashboard.
+  </Step>
+  <Step title="Update SDK" icon="download">
+    Run `npm update qiwi-cash-sdk` or equivalent for your language.
+  </Step>
+  <Step title="Test Endpoints" icon="test-tube">
+    Verify API calls to `https://api.example.com/v2/transactions`.
+  </Step>
+</Steps>
+
+## Deprecated Features
+
+- `GET /v1/balances` endpoint – Migrate to `GET /v2/wallets`.
+- Legacy callback URLs – Switch to webhooks for better reliability.
+
+<Callout kind="alert">
+  Deprecated items will be removed in v3.0.0 (expected Q2 2025). Update now to avoid disruptions.
+</Callout>
